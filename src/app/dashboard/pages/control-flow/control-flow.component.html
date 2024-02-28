@@ -1,5 +1,4 @@
 <section class="grid grid-cols-1 md:grid-cols-2 gap-3">
-
     <!-- @if -->
     <div class="bg-white rounded shadow p-10">
 
@@ -20,19 +19,45 @@
     <!-- @switch -->
     <div class="bg-white rounded shadow p-10">
 
-        <h2 class="text-3xl">{{grade()}}</h2>        
+        <h2 class="text-3xl">{{grade()}}</h2>
 
         @switch (grade()) {
-            @case ('A') {
-                <p>Arriba de 90</p>
-            }
-            @case ('B') {
-                <p>Arriba de 60</p>
-            }
-            @default {
-                <p>Reprobado</p>
-            }
+        @case ('A') {
+        <p>Arriba de 90</p>
+        }
+        @case ('B') {
+        <p>Arriba de 60</p>
+        }
+        @default {
+        <p>Reprobado</p>
+        }
         }
 
+    </div>
+
+    <!-- @for -->
+    <div class="bg-white rounded shadow p-10">
+        <ul>
+            @for (framework of frameworks(); track framework; let i =$index, first = $first, last = $last, even = $even,
+            odd= $odd, count = $count) {
+            <li [class]="{
+                'bg-red-100': even && !first && !last,
+                'bg-blue-100': odd && !first && !last,
+                'bg-green-100': first || last
+            }">
+                {{i+1}} - {{framework}}
+            </li>
+            }
+        </ul>
+    </div>
+
+    <div class="bg-white rounded shadow p-10">
+        <ul>
+            @for (framework of frameworks2(); track $index) {
+            <li>{{framework}}</li>
+            }@empty {
+            <li>No hay frameworks agregados.</li>
+            }
+        </ul>
     </div>
 </section>
